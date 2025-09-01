@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primeiro Post – Diário de Robson</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gruvbox_bg: '#282828',
+            gruvbox_fg: '#ebdbb2',
+            gruvbox_yellow: '#fabd2f',
+            gruvbox_orange: '#fe8019',
+            gruvbox_blue: '#83a598',
+            gruvbox_green: '#b8bb26',
+            gruvbox_red: '#fb4934',
+            gruvbox_gray: '#3c3836',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gruvbox_bg text-gruvbox_fg font-sans min-h-screen px-4 py-10">
+  <article class="max-w-2xl mx-auto bg-gruvbox_gray rounded-lg shadow p-8">
+    <header class="mb-6">
+      <h1 class="text-2xl font-bold text-gruvbox_yellow mb-2">Primeiro freelancer com Python e Selenium</h1>
+      <time class="text-sm text-gruvbox_fg/60">29/08</time>
+    </header>
+    <section class="space-y-4 text-gruvbox_fg/80 leading-relaxed">
+      <p>
+        Hoje comecei meu primeiro trabalho como freelancer usando Python e Selenium. É a primeira vez que estou
+        realmente trabalhando com esse framework, e confesso que não gostei tanto da experiência.
+      </p>
+      <p>
+        Achei o Selenium meio complicado e um pouco lento para algumas tarefas. Já ouvi falar de uma alternativa chamada
+        "pypriwiter" (acho que é esse o nome), que dizem ser melhor para automação. Talvez eu teste em algum projeto
+        futuro.
+      </p>
+      <p>
+        Apesar disso, estou animado por estar colocando meus conhecimentos em prática e aprendendo coisas novas no
+        processo!
+      </p>
+    </section>
+  </article>
+</body>

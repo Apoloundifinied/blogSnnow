@@ -1,5 +1,7 @@
 <!-- ...existing code... -->
 <!-- Chat ao vivo com nickname -->
+<!-- ...existing code... -->
+<!-- Chat ao vivo com nickname -->
 <section id="chat" class="bg-gruvbox_gray rounded-2xl shadow-xl p-6 mt-10 max-w-2xl mx-auto">
   <h2 class="text-xl font-semibold mb-4 text-gruvbox_yellow">Chat ao vivo</h2>
   <div class="flex flex-col h-80 bg-gruvbox_bg rounded-lg border border-gruvbox_yellow/30 p-4 overflow-y-auto mb-4"
@@ -15,7 +17,8 @@
       Enviar
     </button>
   </form>
-  <p class="text-xs text-gruvbox_fg/60 mt-2">Converse com a galera em tempo real! (mensagens não são salvas)</p>
+  <p class="text-xs text-gruvbox_fg/60 mt-2">Converse com a galera em tempo real!</p>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script>
     // Nickname prompt e armazenamento local
     let nickname = localStorage.getItem('nickname');
@@ -24,12 +27,6 @@
       if (nickname && nickname.trim().length > 0) {
         nickname = nickname.trim();
         localStorage.setItem('nickname', nickname);
-        // Simula salvar em nickname.json (apenas local)
-        fetch('nickname.json', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nickname })
-        }).catch(() => { });
       } else {
         nickname = "Visitante";
         localStorage.setItem('nickname', nickname);
@@ -40,18 +37,28 @@
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
 
+    // Conexão com o servidor Socket.io
+    const socket = io('http://localhost:8080'); // Altere para seu domínio se necessário
+
+    // Recebe mensagens do servidor
+    socket.on('chat message', function (data) {
+      const div = document.createElement('div');
+      div.className = "mb-2 flex items-center";
+      div.innerHTML = `<span class="bg-gruvbox_yellow/10 text-gruvbox_fg px-3 py-1 rounded-lg"><span class="font-bold text-gruvbox_yellow mr-2">${data.nickname}:</span> ${data.msg}</span>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+
+    // Envia mensagem para o servidor
     chatForm.addEventListener('submit', function (e) {
       e.preventDefault();
       const msg = chatInput.value.trim();
       if (msg) {
-        const div = document.createElement('div');
-        div.className = "mb-2 flex items-center";
-        div.innerHTML = `<span class="bg-gruvbox_yellow/10 text-gruvbox_fg px-3 py-1 rounded-lg"><span class="font-bold text-gruvbox_yellow mr-2">${nickname}:</span> ${msg}</span>`;
-        chatMessages.appendChild(div);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        socket.emit('chat message', { nickname, msg });
         chatInput.value = '';
       }
     });
   </script>
 </section>
+<!-- ...existing code... -->
 <!-- ...existing

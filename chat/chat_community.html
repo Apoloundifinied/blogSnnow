@@ -38,7 +38,7 @@
     const chatMessages = document.getElementById('chatMessages');
 
     // Conexão com o servidor Socket.io
-    const socket = io('http://localhost:8080'); // Altere para seu domínio se necessário
+    const socket = io(); // Altere para seu domínio se necessário
 
     // Recebe mensagens do servidor
     socket.on('chat message', function (data) {
